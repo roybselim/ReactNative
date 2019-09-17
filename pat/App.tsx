@@ -62,7 +62,7 @@ export default class App extends React.Component<{},IAppState>{
     return (
       <View>
         <Text>POS(People on SuperPowers)</Text>
-        <Text>{`data`}</Text>
+        <Text>{data.length && data[0].item}</Text>
       </View>
     )
   }
