@@ -58,7 +58,6 @@ export default class App extends React.Component<{},IAppState>{
 
   public render(){
     const {data} = this.state
-    console.dir(data);
     return (
       <View>
         <Text>POS(People on SuperPowers)</Text>
