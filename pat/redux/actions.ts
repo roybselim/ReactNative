@@ -1,13 +1,16 @@
-import {IAction} from '../interfaces';
+import {IAction, ISale} from '../interfaces';
 import types from './types';
 
-const actions = {
-    addSale: (text: string): IAction => {
-        return {
-            type: types.ADD_SALE,
-            text
-        };
-    }
-};
+export const addSale = (data: ISale): IAction => {
+    return {
+        type: types.ADD_SALE,
+        data
+    };
+}
 
-export default actions;
+export const addItem = (data: any): IAction => {
+    return {
+        type: types.ADD_ITEM,
+        data
+    }
+}

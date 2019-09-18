@@ -2,10 +2,13 @@ import React from 'react';
 import { View,  Text } from 'react-native';
 import {oauth1} from './authentication/oauth1';
 import netsuite from './response_adapters/netsuite';
-import {fetchItems, IItems} from './networking/fetchItems';
+import {fetchItems} from './networking/fetchItems';
+import {IItem} from './interfaces'
+import {createStore} from 'redux';
+import pos from './redux/reducer';
 
 interface IAppState {
-  data: IItems[];
+  data: IItem[];
 }
 
 export default class App extends React.Component<{},IAppState>{

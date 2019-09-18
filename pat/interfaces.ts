@@ -1,4 +1,15 @@
 export interface IAction {
     type: string;
-    text: string;
+    data?: any;
+}
+
+export interface ISale {
+    id: number;
+    quantity: number;
+}
+
+export interface IItem {
+    id: string;
+    item: string;
+    cost: string;
 }

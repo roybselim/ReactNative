@@ -1,6 +1,6 @@
-import {IItems} from '../networking/fetchItems';
+import {IItem} from '../interfaces';
 
-const netsuite = (data: any): IItems[] => {
+const netsuite = (data: any): IItem[] => {
     return JSON.parse(data).data.map((item: any) => {
         return {
             id: item.internalid,
