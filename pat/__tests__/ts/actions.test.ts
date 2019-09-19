@@ -1,6 +1,6 @@
-import {addSale, addItem} from '../redux/actions';
-import types from '../redux/types';
-import {IAction} from '../interfaces';
+import {addSale, addItem, delItem} from '../../redux/actions';
+import types from '../../redux/types';
+import {IAction} from '../../interfaces';
 
 describe('actions', () => {
     it('should create an action to add a sales', () => {
@@ -19,4 +19,12 @@ describe('actions', () => {
         };
         expect(addItem(data)).toEqual(expectedAction);
     });
+    it('should create an action to delete an item', () => {
+        const data: string = 'Delete Item';
+        const expectedAction: IAction = {
+            type: types.DEL_ITEM,
+            data
+        };
+        expect(delItem(data)).toEqual(expectedAction);
+    });   
 });

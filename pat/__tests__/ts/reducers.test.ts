@@ -1,7 +1,7 @@
-import pos from '../redux/reducer';
-import initial from '../redux/initial';
-import types from '../redux/types';
-import { IAction } from '../interfaces';
+import pos from '../../redux/reducer';
+import initial from '../../redux/initial';
+import types from '../../redux/types';
+import { IAction } from '../../interfaces';
 
 const initialAction: IAction = {
     type: types.ADD_SALE,
@@ -38,29 +38,29 @@ describe('POS Reducer', () => {
 
     // Test adding of a sale item.
     it('should add a sale item', () => {
-        expect(pos(initial.sales, addSaleAction).sales).toEqual([
+        expect(pos(initial, addSaleAction).sales).toEqual([
             testSaleData
         ]);
     });
 
     // Test adding an item
     it('should add an item', () => {
-        expect(pos(initial.items, addItemAction).items).toEqual([
+        expect(pos(initial, addItemAction).items).toEqual([
             testItemData
         ]);
     });
 
     // Test adding a ui item.
     it('should add a ui', () => {
-        expect(pos(initial.ui, {type: 'Add UI', data: {name: 'Roy Selim'}}).ui).toEqual({
+        expect(pos(initial, {type: 'Add UI', data: {name: 'Roy Selim'}}).ui).toEqual({
             name: 'Roy Selim'
         });
     });
 
     // Test adding a meta item.
     it('should add a meta item', () => {
-        expect(pos(initial.meta, {type: 'Add Meta', data: {name: 'Roy Selim'}}).meta).toEqual({
+        expect(pos(initial, {type: 'Add Meta', data: {name: 'Roy Selim'}}).meta).toEqual({
             name: 'Roy Selim'
-        })
+        });
     });
-})
+});

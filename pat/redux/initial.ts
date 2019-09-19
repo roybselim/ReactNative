@@ -1,10 +1,11 @@
-const initial = {
-	items: [
-	],
-	sales: [
-	],
+import {IState} from '../interfaces'
+
+const initial: IState = {
+	items: [],
+	sales: [],
 	ui: {},
-	meta: {}
+	meta: {},
+	config: {}
 };
 
 export default initial;

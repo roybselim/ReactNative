@@ -13,3 +13,11 @@ export interface IItem {
     item: string;
     cost: string;
 }
+
+export interface IState {
+    items: IItem[],
+    sales: ISale[],
+    ui: object,
+    meta: object,
+    config: object;
+}

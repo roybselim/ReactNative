@@ -1,4 +1,4 @@
-import {oauth1, IOAuthOptions} from '../authentication/oauth1';
+import {oauth1, IOAuthOptions} from '../../authentication/oauth1';
 
 const request_data = {
     url: 'https://tstdrv710253.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=302&deploy=1',

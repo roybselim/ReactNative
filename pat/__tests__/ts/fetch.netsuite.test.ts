@@ -1,6 +1,6 @@
-import {fetchItems} from '../networking/fetchItems';
-import {oauth1} from '../authentication/oauth1';
-import netsuite from '../response_adapters/netsuite';
+import {fetchItems} from '../../networking/fetchItems';
+import {oauth1} from '../../authentication/oauth1';
+import netsuite from '../../response_adapters/netsuite';
 
 test('fetch data should be ok', () => {
     const request_data = {

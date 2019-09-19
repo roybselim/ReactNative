@@ -6,6 +6,9 @@ import {fetchItems} from './networking/fetchItems';
 import {IItem} from './interfaces'
 import {createStore} from 'redux';
 import pos from './redux/reducer';
+import RootComponent from './components/root';
+import { mapping, light as lightTheme } from '@eva-design/eva';
+import { ApplicationProvider } from 'react-native-ui-kitten';
 
 interface IAppState {
   data: IItem[];
@@ -62,10 +65,11 @@ export default class App extends React.Component<{},IAppState>{
   public render(){
     const {data} = this.state
     return (
-      <View>
-        <Text>POS(People on SuperPowers)</Text>
-        <Text>{data.length && data[0].item}</Text>
-      </View>
+      <ApplicationProvider
+        mapping={mapping}
+        theme={lightTheme}>
+        <RootComponent />
+      </ApplicationProvider>
     )
   }
 }
