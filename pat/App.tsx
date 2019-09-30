@@ -13,7 +13,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import DetailsScreen from './components/details';
 import { Provider } from 'react-redux';
-import Config from './screens/config/components/config';
+import Config from './screens/config/config';
 
 const store = createStore(pos);
 

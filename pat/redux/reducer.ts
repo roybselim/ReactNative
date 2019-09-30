@@ -20,7 +20,7 @@ function meta(state: object = {}, action: IAction): any {
 
 function config(state: object = {}, action: IAction): any {
     switch(action.type){
-        case types.ADD_CONFIG:
+        case types.EDIT_CONFIG:
             return Object.assign({}, state, action.data)
         default: return state;
     }

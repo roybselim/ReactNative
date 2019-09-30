@@ -1,4 +1,4 @@
-import Config from '../../screens/config/components/config';
+import Config from '../../screens/config/config';
 import renderer from 'react-test-renderer';
 import 'react-native';
 import React from 'react';

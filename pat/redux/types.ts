@@ -3,7 +3,7 @@ const types = {
     ADD_ITEM: 'Add Item',
     ADD_UI: 'Add UI',
     ADD_META: 'Add Meta',
-    ADD_CONFIG: 'Add Config',
+    EDIT_CONFIG: 'Edit Config',
     DEL_ITEM: 'Delete Item'
 }
 
