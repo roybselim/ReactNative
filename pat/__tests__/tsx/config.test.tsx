@@ -1,4 +1,4 @@
-import RootComponent from '../../components/root';
+import Config from '../../screens/config/components/config';
 import renderer from 'react-test-renderer';
 import 'react-native';
 import React from 'react';
@@ -16,7 +16,7 @@ it('renders correctly', () => {
             mapping={mapping}
             theme={lightTheme}>
                 <Provider store={store}>
-                    <RootComponent />
+                    <Config />
                 </Provider>
         </ApplicationProvider>
     );

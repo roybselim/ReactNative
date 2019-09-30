@@ -7,12 +7,6 @@ interface IFetchDataOptions {
     response_adapters: (data: any) => IItem[];
 }
 
-// export interface IItem {
-//     id: string;
-//     item: string;
-//     cost: string;
-// }
-
 export const fetchItems = (options: IFetchDataOptions): Promise<any> => {
     return fetch(options.url, options.options).then((res: Response): any => {
         if(res.ok){

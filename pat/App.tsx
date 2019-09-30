@@ -9,10 +9,27 @@ import pos from './redux/reducer';
 import RootComponent from './components/root';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import DetailsScreen from './components/details';
+import { Provider } from 'react-redux';
+import Config from './screens/config/components/config';
+
+const store = createStore(pos);
 
 interface IAppState {
   data: IItem[];
 }
+
+const MainNavigator = createStackNavigator({
+  Home: RootComponent,
+  Details: DetailsScreen,
+  Configuration: Config
+},{
+  initialRouteName: 'Home'
+});
+
+const AppContainer = createAppContainer(MainNavigator);
 
 export default class App extends React.Component<{},IAppState>{
   public constructor(props: any){
@@ -20,6 +37,19 @@ export default class App extends React.Component<{},IAppState>{
     this.state = {
       data: []
     }
+  }
+  
+  public render(){
+    const {data} = this.state
+    return (
+      <ApplicationProvider
+      mapping={mapping}
+      theme={lightTheme}>
+        <Provider store={store}>
+          <AppContainer />
+        </Provider>
+      </ApplicationProvider>
+    )
   }
 
   public componentDidMount(){
@@ -60,16 +90,5 @@ export default class App extends React.Component<{},IAppState>{
     }).then(data => {
       this.setState({data});
     });
-  }
-
-  public render(){
-    const {data} = this.state
-    return (
-      <ApplicationProvider
-        mapping={mapping}
-        theme={lightTheme}>
-        <RootComponent />
-      </ApplicationProvider>
-    )
   }
 }
