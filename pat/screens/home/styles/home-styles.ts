@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-const config_styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
@@ -8,10 +8,6 @@ const config_styles = StyleSheet.create({
     text: {
       marginVertical: 16,
     },
-    picker: {
-      height: 50, 
-      width: 300
-    }
 });
 
-export default config_styles
+export default styles;

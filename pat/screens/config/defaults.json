@@ -1,0 +1,12 @@
+{
+    "server": ["NetSuite", "Odoo", "Quickbooks"],
+    "auth": ["OAuth 1", "OAuth 2"],
+    "oauth1": {
+        "consumer_key": "",
+        "consumer_secret": "",
+        "realm": "",
+        "token_key": "",
+        "token_secret": ""
+    },
+    "oauth2": {}
+}

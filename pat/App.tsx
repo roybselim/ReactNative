@@ -14,6 +14,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import DetailsScreen from './components/details';
 import { Provider } from 'react-redux';
 import Config from './screens/config/config';
+import Home from './screens/home/home';
 
 const store = createStore(pos);
 
@@ -22,7 +23,7 @@ interface IAppState {
 }
 
 const MainNavigator = createStackNavigator({
-  Home: RootComponent,
+  Home: Home,
   Details: DetailsScreen,
   Configuration: Config
 },{
@@ -41,6 +42,7 @@ export default class App extends React.Component<{},IAppState>{
   
   public render(){
     const {data} = this.state
+    console.log(data);
     return (
       <ApplicationProvider
       mapping={mapping}

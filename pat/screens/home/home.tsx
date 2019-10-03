@@ -1,11 +1,11 @@
 import React from 'react';
-import ConfigCtnr from './containers/config-ctnr';
+import HomeCtnr from './containers/home-cntr';
 
 export default class Config extends React.Component<any,any>{
     public render(){
         return (
           <>
-            <ConfigCtnr navigation={this.props.navigation}/>
+            <HomeCtnr navigation={this.props.navigation}/>
           </>
         )
     }
