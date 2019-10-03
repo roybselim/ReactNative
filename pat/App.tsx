@@ -1,14 +1,10 @@
 import React from 'react';
-import { View,  Text } from 'react-native';
 import {oauth1} from './authentication/oauth1';
 import netsuite from './response_adapters/netsuite';
 import {fetchItems} from './networking/fetchItems';
 import {IItem} from './interfaces'
 import {createStore} from 'redux';
 import pos from './redux/reducer';
-import RootComponent from './components/root';
-import { mapping, light as lightTheme } from '@eva-design/eva';
-import { ApplicationProvider } from 'react-native-ui-kitten';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import DetailsScreen from './components/details';
@@ -42,15 +38,10 @@ export default class App extends React.Component<{},IAppState>{
   
   public render(){
     const {data} = this.state
-    console.log(data);
     return (
-      <ApplicationProvider
-      mapping={mapping}
-      theme={lightTheme}>
-        <Provider store={store}>
-          <AppContainer />
-        </Provider>
-      </ApplicationProvider>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
     )
   }
 

@@ -1,7 +1,5 @@
 import React from 'react';
-// import { View,  Text } from 'react-native';
-import { Layout, Text, Button } from 'react-native-ui-kitten';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, Button, View } from 'react-native';
 import { connect } from 'react-redux';
 import SQLite from "react-native-sqlite-storage";
 
@@ -19,8 +17,6 @@ class RootComponent extends React.Component<any,any>{
     SQLite.DEBUG(true);
     SQLite.enablePromise(true);
 
-    // console.log(SQLite);
-
     SQLite.openDatabase({
         name: "TestDatabase",
         location: "default"
@@ -31,10 +27,10 @@ class RootComponent extends React.Component<any,any>{
 
   public render(){
     return (
-      <Layout style={styles.container}>
-        <Text style={styles.text} category='h4'>Welcome to UI Kitten</Text>
-        <Button onPress={() => this.props.navigation.navigate('Details')}>BUTTON</Button>
-      </Layout>
+      <View style={styles.container}>
+        <Text style={styles.text} >Welcome to UI Kitten</Text>
+        <Button title="details" onPress={() => this.props.navigation.navigate('Details')}>BUTTON</Button>
+      </View>
     )
   }
 }

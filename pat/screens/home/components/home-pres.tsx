@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Layout, Text, Button } from 'react-native-ui-kitten';
 import { View, Text, Button } from 'react-native';
 import SQLite from "react-native-sqlite-storage";
 import styles from '../styles/home-styles';
@@ -20,15 +19,6 @@ export class HomePres extends React.Component<IHomePresProps>{
         console.log("Database open!");
     });
   }
-
-  // public render(){
-  //   return (
-  //     <Layout style={styles.container}>
-  //       <Text style={styles.text} category='h4'>Welcome to UI Kitten</Text>
-  //       <Button onPress={() => this.props.navigation.navigate('Details')}>BUTTON</Button>
-  //     </Layout>
-  //   )
-  // }
 
   public render(){
     return (
