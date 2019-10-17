@@ -32,7 +32,9 @@ function items(state: IItem[] = [], action: IAction): any{
             return [
                 ...state,
                 action.data
-            ]        
+            ]   
+        case types.RCV_INVENTORY:
+            return action.data;
         default: return state;
     }    
 }
@@ -48,12 +50,23 @@ function sales(state: ISale[] = [], action: IAction): any{
     }
 }
 
+function isFetching(state: boolean = false, action: IAction) {
+    switch(action.type){
+        case types.RQST_INVENTORY:
+            return true;
+        case types.RCV_INVENTORY:
+            return false;
+        default: return state;
+    }
+}
+
 const pos = combineReducers({
     items,
     sales,
     ui, 
     meta,
-    config
+    config,
+    isFetching
 })
 
 export default pos;

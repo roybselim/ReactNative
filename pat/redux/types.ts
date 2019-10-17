@@ -4,7 +4,9 @@ const types = {
     ADD_UI: 'Add UI',
     ADD_META: 'Add Meta',
     EDIT_CONFIG: 'Edit Config',
-    DEL_ITEM: 'Delete Item'
+    DEL_ITEM: 'Delete Item',
+    RQST_INVENTORY: 'Request Inventory',
+    RCV_INVENTORY: 'Receieve Inventory'
 }
 
 export default types;

@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import { HomePres } from '../components/home-pres';
 
-const HomeCtnr = connect()(HomePres);
+const mapStateToProps = (state: any) => {
+    return state;
+}
+
+const HomeCtnr = connect(mapStateToProps)(HomePres);
 
 export default HomeCtnr;

@@ -5,7 +5,8 @@ const initial: IState = {
 	sales: [],
 	ui: {},
 	meta: {},
-	config: {}
+	config: {},
+	isFetching: false
 };
 
 export default initial;

@@ -20,4 +20,5 @@ export interface IState {
     ui: object,
     meta: object,
     config: object;
+    isFetching: boolean;
 }

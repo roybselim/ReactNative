@@ -21,6 +21,7 @@ export class HomePres extends React.Component<IHomePresProps>{
   }
 
   public render(){
+    console.dir(this.props);
     return (
       <View style={styles.container}>
         <Text style={styles.text} >Welcome to UI Kitten</Text>
