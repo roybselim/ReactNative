@@ -9,7 +9,7 @@ export interface ISale {
 }
 
 export interface IItem {
-    id: string;
+    id?: string;
     item: string;
     cost: string;
 }
@@ -21,4 +21,11 @@ export interface IState {
     meta: object,
     config: object;
     isFetching: boolean;
+}
+
+export interface IDbOptions {
+    name?: string;
+    version?: string;
+    displayName?: string;
+    size?: number;
 }

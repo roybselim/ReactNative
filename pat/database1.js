@@ -1,4 +1,5 @@
 import SQLite from "react-native-sqlite-storage";
+
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
@@ -11,11 +12,11 @@ export default class Database {
     initDB() {
         let db;
         return new Promise((resolve) => {
-          console.log("Plugin integrity check ...");
+          // console.log("Plugin integrity check ...");
           SQLite.echoTest()
             .then(() => {
-              console.log("Integrity check passed ...");
-              console.log("Opening database ...");
+              // console.log("Integrity check passed ...");
+              // console.log("Opening database ...");
               SQLite.openDatabase(
                 database_name,
                 database_version,
@@ -24,21 +25,23 @@ export default class Database {
               )
                 .then(DB => {
                   db = DB;
-                  console.log("Database OPEN");
+                  // console.log("Database OPEN");
                   db.executeSql('SELECT 1 FROM Product LIMIT 1').then(() => {
-                      console.log("Database is ready ... executing query ...");
+                      // console.log("Database is ready ... executing query ...");
+                      resolve(db);
                   }).catch((error) =>{
-                      console.log("Received error: ", error);
-                      console.log("Database not yet ready ... populating data");
+                      // console.log("Received error: ", error);
+                      // console.log("Database not yet ready ... populating data");
                       db.transaction((tx) => {
-                          tx.executeSql('CREATE TABLE IF NOT EXISTS Product (prodId, prodName, prodDesc, prodImage, prodPrice)');
+                          tx.executeSql('CREATE TABLE IF NOT EXISTS Product (id, item, cost)');
                       }).then(() => {
-                          console.log("Table created successfully");
+                          // console.log("Table created successfully");
+                          resolve(db)
                       }).catch(error => {
                           console.log(error);
                       });
                   });
-                  resolve(db);
+                  // resolve(db);
                 })
                 .catch(error => {
                   console.log(error);
@@ -58,31 +61,32 @@ export default class Database {
               console.log("Database CLOSED");
             })
             .catch(error => {
-              this.errorCB(error);
+              console.dir(error);
             });
         } else {
           console.log("Database was not OPENED");
         }
       };
-      listProduct() {
+
+      listProducts() {
         return new Promise((resolve) => {
           const products = [];
           this.initDB().then((db) => {
             db.transaction((tx) => {
-              tx.executeSql('SELECT p.prodId, p.prodName, p.prodImage FROM Product p', []).then(([tx,results]) => {
-                console.log("Query completed");
+              tx.executeSql('SELECT p.id, p.item, p.cost FROM Product p', []).then(([tx,results]) => {
+                // console.log("Query completed");
                 var len = results.rows.length;
                 for (let i = 0; i < len; i++) {
                   let row = results.rows.item(i);
-                  console.log(`Prod ID: ${row.prodId}, Prod Name: ${row.prodName}`)
-                  const { prodId, prodName, prodImage } = row;
+                  // console.log(`Prod ID: ${row.id}, Prod Name: ${row.item}`)
+                  const { id, item, cost } = row;
                   products.push({
-                    prodId,
-                    prodName,
-                    prodImage
+                    id,
+                    item,
+                    cost
                   });
                 }
-                console.log(products);
+                //console.log(products);
                 resolve(products);
               });
             }).then((result) => {
@@ -101,7 +105,7 @@ export default class Database {
         return new Promise((resolve) => {
           this.initDB().then((db) => {
             db.transaction((tx) => {
-              tx.executeSql('SELECT * FROM Product WHERE prodId = ?', [id]).then(([tx,results]) => {
+              tx.executeSql('SELECT * FROM Product WHERE id = ?', [id]).then(([tx,results]) => {
                 console.log(results);
                 if(results.rows.length > 0) {
                   let row = results.rows.item(0);
@@ -123,7 +127,7 @@ export default class Database {
         return new Promise((resolve) => {
           this.initDB().then((db) => {
             db.transaction((tx) => {
-              tx.executeSql('INSERT INTO Product VALUES (?, ?, ?, ?, ?)', [prod.prodId, prod.prodName, prod.prodDesc, prod.prodImage, prod.prodPrice]).then(([tx, results]) => {
+              tx.executeSql('INSERT INTO Product VALUES (?, ?, ?)', [prod.id, prod.item, prod.cost]).then(([tx, results]) => {
                 resolve(results);
               });
             }).then((result) => {
@@ -141,7 +145,7 @@ export default class Database {
         return new Promise((resolve) => {
           this.initDB().then((db) => {
             db.transaction((tx) => {
-              tx.executeSql('UPDATE Product SET prodName = ?, prodDesc = ?, prodImage = ?, prodPrice = ? WHERE prodId = ?', [prod.prodName, prod.prodDesc, prod.prodImage, prod.prodPrice, id]).then(([tx, results]) => {
+              tx.executeSql('UPDATE Product SET item = ?, cost = ? WHERE id = ?', [prod.item, prod.cost, id]).then(([tx, results]) => {
                 resolve(results);
               });
             }).then((result) => {
@@ -159,7 +163,7 @@ export default class Database {
         return new Promise((resolve) => {
           this.initDB().then((db) => {
             db.transaction((tx) => {
-              tx.executeSql('DELETE FROM Product WHERE prodId = ?', [id]).then(([tx, results]) => {
+              tx.executeSql('DELETE FROM Product WHERE id = ?', [id]).then(([tx, results]) => {
                 console.log(results);
                 resolve(results);
               });
@@ -172,5 +176,22 @@ export default class Database {
             console.log(err);
           });
         });  
+      }
+
+      deleteTable(){
+        return new Promise((resolve) => {
+          SQLite.openDatabase(
+            database_name,
+            database_version,
+            database_displayname,
+            database_size
+          ).then((db) => {
+            db.transaction((tx) => {
+              tx.executeSql('DROP TABLE IF EXISTS Product', []).then(([tx, results]) => {
+                resolve(db)
+              })
+            });
+          })
+        });          
       }
 }
