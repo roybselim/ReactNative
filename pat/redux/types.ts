@@ -6,7 +6,9 @@ const types = {
     EDIT_CONFIG: 'Edit Config',
     DEL_ITEM: 'Delete Item',
     RQST_INVENTORY: 'Request Inventory',
-    RCV_INVENTORY: 'Receieve Inventory'
+    RCV_INVENTORY: 'Receieve Inventory',
+    ADD_TO_CART: 'Add to cart',
+    REMOVE_FROM_CART: 'Remove from cart'
 }
 
 export default types;

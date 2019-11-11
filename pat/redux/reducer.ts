@@ -39,6 +39,20 @@ function items(state: IItem[] = [], action: IAction): any{
     }    
 }
 
+function cart(state: any[] = [], action: any): any{
+    switch(action.type){
+        case types.ADD_TO_CART:
+            return [
+                ...state,
+                action.id
+            ]  
+        case types.REMOVE_FROM_CART:
+            const remItem = state.findIndex(itm => itm === action.id);
+            return remItem === -1 ? state: state.filter((itm, ndx) => ndx !== remItem);
+        default: return state;
+    }    
+}
+
 function sales(state: ISale[] = [], action: IAction): any{
     switch(action.type){
         case types.ADD_SALE:
@@ -63,6 +77,7 @@ function isFetching(state: boolean = false, action: IAction) {
 const pos = combineReducers({
     items,
     sales,
+    cart,
     ui, 
     meta,
     config,

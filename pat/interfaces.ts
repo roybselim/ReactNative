@@ -17,6 +17,7 @@ export interface IItem {
 export interface IState {
     items: IItem[],
     sales: ISale[],
+    cart: any[],
     ui: object,
     meta: object,
     config: object;

@@ -4,7 +4,9 @@ import {oauth1} from '../authentication/oauth1';
 import {fetchItems} from '../networking/fetchItems';
 import netsuite from '../response_adapters/netsuite';
 import NetInfo from "@react-native-community/netinfo";
-import Database from '../database1';
+// import Database from '../database1';
+import DatabaseHelper from '../database';
+import SQLite from "react-native-sqlite-storage";
 
 export const addSale = (data: any): IAction => {
     return {
@@ -47,9 +49,21 @@ export const rcvInv = (data: any) => {
     }
 }
 
-export const fetchNSInv = (): any => {
-    const db = new Database();
+export const addToCart = (id: any) => {
+    return {
+        type: types.ADD_TO_CART,
+        id
+    }
+}
 
+export const removeFromCart = (id: any) => {
+    return {
+        type: types.REMOVE_FROM_CART,
+        id
+    }
+}
+
+export const fetchNSInv = (): any => {
     return (dispatch: any) => {
         NetInfo.fetch().then(state => {
             if(state.isConnected){
@@ -86,19 +100,30 @@ export const fetchNSInv = (): any => {
                         method: request_data.method
                     },
                     response_adapters: netsuite
-                }).then((data: IItem[]) => {
-                    db.deleteTable().then(res => {
-                        db.initDB().then(DB => {
-                            data.forEach(item => db.addProduct(item).then(added => console.dir(added)))
-                        })
-                    })
+                }).then((data: IItem[]) => {                    
+                    SQLite.enablePromise(true);
+                    SQLite.openDatabase({name: 'POSoffline.db', location: 'default'}).then(sqliteDb => {
+                        const dbHelper = new DatabaseHelper();
+                        dbHelper.dropProductTable(sqliteDb).then(() => {
+                            dbHelper.createProductTable(sqliteDb).then(() => {
+                                data.forEach(item => {
+                                    dbHelper.addProduct(sqliteDb, item).then(() => {
+                                    }).catch(err4 => console.dir(err4));
+                                })
+                            }).catch(err3 => console.dir(err3))                            
+                        }).catch(err2 => console.dir(err2));
+                    }).catch(err1 => console.dir(err1));
 
                     dispatch(rcvInv(data));
                 }).catch(error => console.dir(error));                
             } else {
-                db.listProducts().then((value:IItem[]) => {
-                    dispatch(rcvInv(value));
-                })
+                SQLite.enablePromise(true);
+                SQLite.openDatabase({name: 'POSoffline.db', location: 'default'}).then((sqliteDb) => {
+                    const dbHelper = new DatabaseHelper();
+                    dbHelper.listProducts(sqliteDb).then((res: IItem[]) => {
+                        dispatch(rcvInv(res));
+                    }).catch(err2 => console.dir(err2));
+                }).catch(err1 => console.dir(err1));
             }
         }).catch(error => console.dir(error));
     }

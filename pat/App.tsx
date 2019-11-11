@@ -7,6 +7,8 @@ import DetailsScreen from './components/details';
 import { Provider } from 'react-redux';
 import Config from './screens/config/config';
 import Home from './screens/home/home';
+import Products from './screens/products/products';
+import Cart from './screens/cart/cart';
 import thunkMiddleware from 'redux-thunk';
 import {fetchNSInv} from './redux/actions';
 
@@ -17,7 +19,9 @@ const store = createStore(pos,
 const MainNavigator = createStackNavigator({
   Home: Home,
   Details: DetailsScreen,
-  Configuration: Config
+  Configuration: Config,
+  Products: Products,
+  Cart: Cart
 },{
   initialRouteName: 'Home'
 });
