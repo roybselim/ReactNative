@@ -63,6 +63,20 @@ export const removeFromCart = (id: any) => {
     }
 }
 
+export const changeQuantity = (ops: any) => {
+    return {
+        type: types.CHANGE_QUANTITY,
+        ops
+    }
+}
+
+export const selectItem = (item: IItem) => {
+    return {
+        type: types.SELECT_ITEM,
+        item
+    }
+}
+
 export const fetchNSInv = (): any => {
     return (dispatch: any) => {
         NetInfo.fetch().then(state => {

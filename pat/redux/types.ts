@@ -8,7 +8,9 @@ const types = {
     RQST_INVENTORY: 'Request Inventory',
     RCV_INVENTORY: 'Receieve Inventory',
     ADD_TO_CART: 'Add to cart',
-    REMOVE_FROM_CART: 'Remove from cart'
+    REMOVE_FROM_CART: 'Remove from cart',
+    CHANGE_QUANTITY: 'Change Quantity',
+    SELECT_ITEM: 'Select Item'
 }
 
 export default types;

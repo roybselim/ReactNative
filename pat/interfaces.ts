@@ -14,6 +14,11 @@ export interface IItem {
     cost: string;
 }
 
+export interface ISelectedItem{
+    item: any
+    quantity: number
+}
+
 export interface IState {
     items: IItem[],
     sales: ISale[],
@@ -22,6 +27,7 @@ export interface IState {
     meta: object,
     config: object;
     isFetching: boolean;
+    selectedItem: ISelectedItem
 }
 
 export interface IDbOptions {

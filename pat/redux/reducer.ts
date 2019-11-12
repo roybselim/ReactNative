@@ -1,5 +1,5 @@
 import types from './types';
-import {IAction, IItem, ISale} from '../interfaces';
+import {IAction, IItem, ISale, ISelectedItem} from '../interfaces';
 import {combineReducers} from 'redux';
 
 function ui(state: object = {}, action: IAction): any {
@@ -71,6 +71,20 @@ function isFetching(state: boolean = false, action: IAction) {
         case types.RCV_INVENTORY:
             return false;
         default: return state;
+    }
+}
+
+function selectedItem(state: ISelectedItem = {item: undefined, quantity: 0}, action: any){
+    switch(action.type){
+        case types.CHANGE_QUANTITY:
+            return Object.assign({}, state, 
+                {
+                    quantity: action.ops === '+' ? state.quantity++ : state.quantity--
+                }
+            )
+        case types.SELECT_ITEM:
+            return Object.assign({}, state, {item: action.item})
+        default: return state;   
     }
 }
 

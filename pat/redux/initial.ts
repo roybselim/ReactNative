@@ -7,7 +7,11 @@ const initial: IState = {
 	ui: {},
 	meta: {},
 	config: {},
-	isFetching: false
+	isFetching: false,
+	selectedItem: {
+		item: undefined,
+		quantity: 0
+	}
 };
 
 export default initial;
