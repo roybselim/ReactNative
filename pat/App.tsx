@@ -9,6 +9,7 @@ import Config from './screens/config/config';
 import Home from './screens/home/home';
 import Products from './screens/products/products';
 import Cart from './screens/cart/cart';
+import Item from './screens/item/item';
 import thunkMiddleware from 'redux-thunk';
 import {fetchNSInv} from './redux/actions';
 
@@ -21,7 +22,8 @@ const MainNavigator = createStackNavigator({
   Details: DetailsScreen,
   Configuration: Config,
   Products: Products,
-  Cart: Cart
+  Cart: Cart,
+  Item: Item
 },{
   initialRouteName: 'Home'
 });

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { ProductsPres } from '../components/products-pres';
-import {addToCart} from '../../../redux/actions';
+import {addToCart, selectItem} from '../../../redux/actions';
+import {IItem} from '../../../interfaces'
 
 const mapStateToProps = (state: any) => {
     return {items: state.items};
@@ -8,8 +9,11 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        onItemSelect: (id: any) => {
-            dispatch(addToCart(id))
+        // onItemSelect: (id: any) => {
+        //     dispatch(addToCart(id))
+        // }
+        onItemSelect: (item: IItem) => {
+            dispatch(selectItem(item));
         }
     }
 }

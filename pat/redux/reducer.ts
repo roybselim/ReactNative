@@ -79,11 +79,11 @@ function selectedItem(state: ISelectedItem = {item: undefined, quantity: 0}, act
         case types.CHANGE_QUANTITY:
             return Object.assign({}, state, 
                 {
-                    quantity: action.ops === '+' ? state.quantity++ : state.quantity--
+                    quantity: action.ops === '+' ? state.quantity + 1 : state.quantity - 1
                 }
             )
         case types.SELECT_ITEM:
-            return Object.assign({}, state, {item: action.item})
+            return Object.assign({}, state, {item: action.item, quantity: 1})
         default: return state;   
     }
 }
@@ -95,7 +95,8 @@ const pos = combineReducers({
     ui, 
     meta,
     config,
-    isFetching
+    isFetching,
+    selectedItem
 })
 
 export default pos;

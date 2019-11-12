@@ -15,16 +15,18 @@ export class ItemPres extends React.Component<IItemPresProps>{
         const {selectedItem, onChangeQuantity, onAddToCart} = this.props;
         return (
             <ScrollView>
-                <View>
+                <View style={{flexDirection: 'row'}}>
+                    <Text>{selectedItem.item.item}</Text>
                     <Button title={`-`} onPress={() => 
                         onChangeQuantity('-')}
                     />                    
-                    <Text>{`This is the Item`}</Text>
+                    <Text>{selectedItem.quantity}</Text>
                     <Button title={`+`} onPress={() => 
                         onChangeQuantity('+')}
-                    />     
+                    />
+                    <Text>{selectedItem.quantity * parseInt(selectedItem.item.cost)}</Text>    
                 </View>
-                <View>
+                <View style={{flex: 0, flexDirection: 'row'}}>
                     <Button title={`Add to cart`} onPress={() => 
                         onAddToCart(selectedItem.item.id, selectedItem.quantity)}
                     />
